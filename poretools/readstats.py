@@ -1,4 +1,4 @@
-from . import Fast5File
+from . import Fast5FileSet
 
 
 def run(parser, args):
@@ -7,7 +7,7 @@ def run(parser, args):
         "start_time\tchannel_number\tread_number\ttemplate_events\tcomplement_events"
     )
 
-    for fast5 in Fast5File.Fast5FileSet(args.files):
+    for fast5 in Fast5FileSet(args.files):
 
         start_time = fast5.get_start_time()
         channel_number = fast5.get_channel_number()

@@ -1,4 +1,4 @@
-from . import Fast5File
+from . import Fast5FileSet
 from collections import Counter
 
 
@@ -7,7 +7,7 @@ def run(parser, args):
     qual_count = Counter()
     total_nucs = 0
 
-    for fast5 in Fast5File.Fast5FileSet(args.files):
+    for fast5 in Fast5FileSet(args.files):
         fq = fast5.get_fastq()
         if fq is not None:
             for q in fq.qual:

@@ -6,7 +6,7 @@ import matplotlib
 from matplotlib import pyplot as plt
 
 import seaborn as sns
-from . import Fast5File
+from . import Fast5FileSet
 
 import logging
 
@@ -35,7 +35,7 @@ def run(parser, args):
     sizes = []
     files_processed = 0
 
-    for fast5 in Fast5File.Fast5FileSet(args.files):
+    for fast5 in Fast5FileSet(args.files):
         fq = fast5.get_fastq()
         if fq is not None:
             sizes.append(len(fq.seq))

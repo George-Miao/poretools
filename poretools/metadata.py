@@ -1,10 +1,10 @@
-from . import Fast5File
+from . import Fast5FileSet
 
 
 def run(parser, args):
 
     if args.read:
-        for i, fast5 in enumerate(Fast5File.Fast5FileSet(args.files)):
+        for i, fast5 in enumerate(Fast5FileSet(args.files)):
             for metadata_dict in fast5.read_metadata:
                 if i == 0:
                     header = list(metadata_dict.keys())
@@ -13,7 +13,7 @@ def run(parser, args):
                                  [str(metadata_dict[k]) for k in header])))
     else:
         print("asic_id\tasic_temp\theatsink_temp")
-        for fast5 in Fast5File.Fast5FileSet(args.files):
+        for fast5 in Fast5FileSet(args.files):
 
             asic_temp = fast5.get_asic_temp()
             asic_id = fast5.get_asic_id()

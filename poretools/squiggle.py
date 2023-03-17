@@ -12,7 +12,7 @@ import logging
 
 logger = logging.getLogger('poretools')
 
-from . import Fast5File
+from . import Fast5FileSet
 
 
 def plot_squiggle(args, filename, start_times, mean_signals):
@@ -74,7 +74,7 @@ def do_plot_squiggle(args, fast5):
 
 def run(parser, args):
 
-    fast5_set = Fast5File.Fast5FileSet(args.files)
+    fast5_set = Fast5FileSet(args.files)
 
     first_fast5 = next(fast5_set)
     for fast5 in fast5_set:

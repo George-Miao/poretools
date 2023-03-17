@@ -1,4 +1,4 @@
-from . import Fast5File
+from . import Fast5FileSet
 import sys
 import os
 from os import makedirs
@@ -17,7 +17,7 @@ def run(parser, args):
         logger.error('destination directory needs to exist')
         return
 
-    for fast5 in Fast5File.Fast5FileSet(args.files):
+    for fast5 in Fast5FileSet(args.files):
 
         #offset = fast5.get_start_time() - fast5.get_exp_start_time()
 

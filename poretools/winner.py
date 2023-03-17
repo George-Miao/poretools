@@ -1,4 +1,4 @@
-from . import Fast5File
+from . import Fast5FileSet
 import sys
 
 #logging
@@ -11,7 +11,7 @@ def run(parser, args):
     longest_size = 0
     longest_read = None
 
-    for fast5 in Fast5File.Fast5FileSet(args.files):
+    for fast5 in Fast5FileSet(args.files):
         fas = fast5.get_fastas(args.type)
 
         for fa in fas:

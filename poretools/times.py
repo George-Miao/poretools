@@ -1,4 +1,4 @@
-from . import Fast5File
+from . import Fast5FileSet
 from time import strftime, localtime
 import sys
 
@@ -15,7 +15,7 @@ def run(parser, args):
         'day', 'hour', 'minute'
     ])))
 
-    for fast5 in Fast5File.Fast5FileSet(args.files):
+    for fast5 in Fast5FileSet(args.files):
         if fast5.is_open:
 
             fq = fast5.get_fastq()

@@ -1,6 +1,6 @@
 import tarfile
 import sys
-from . import Fast5File
+from . import Fast5FileSet
 
 #logging
 import logging
@@ -21,7 +21,7 @@ def run(parser, args):
         sys.exit()
 
     file_count = 0
-    for fast5 in Fast5File.Fast5FileSet(args.files):
+    for fast5 in Fast5FileSet(args.files):
         tar.add(fast5.filename)
         fast5.close()
         file_count += 1

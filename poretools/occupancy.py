@@ -1,4 +1,4 @@
-from . import Fast5File
+from . import Fast5FileSet
 from collections import Counter
 import sys
 import pandas as pd
@@ -62,7 +62,7 @@ def run(parser, args):
     tot_bp_per_pore = Counter()
 
     print(("\t".join(['channel_number', 'start_time', 'duration'])))
-    for fast5 in Fast5File.Fast5FileSet(args.files):
+    for fast5 in Fast5FileSet(args.files):
         if fast5.is_open:
             fq = fast5.get_fastq()
 

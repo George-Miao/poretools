@@ -1,11 +1,11 @@
-from . import Fast5File
+from . import Fast5FileSet
 
 
 def run(parser, args):
 
     print(('\t'.join(['length', 'name', 'sequence', 'quals'])))
 
-    for fast5 in Fast5File.Fast5FileSet(args.files):
+    for fast5 in Fast5FileSet(args.files):
         fqs = fast5.get_fastqs(args.type)
         for fq in fqs:
             if fq is None:

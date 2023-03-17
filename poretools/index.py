@@ -1,4 +1,4 @@
-from . import Fast5File
+from . import Fast5FileSet
 import datetime
 
 ############
@@ -22,7 +22,7 @@ def run(parser, args):
         "source_filename\ttemplate_fwd_length\tcomplement_rev_length\t2d_length\tasic_id\tasic_temp\theatsink_temp\tchannel\texp_start_time\texp_start_time_string_date\texp_start_time_string_time\tstart_time\tstart_time_string_date\tstart_time_string_time\tduration\tfast5_version"
     )
 
-    for fast5 in Fast5File.Fast5FileSet(args.files):
+    for fast5 in Fast5FileSet(args.files):
 
         # run and flowcell parameters
         asic_temp = fast5.get_asic_temp()

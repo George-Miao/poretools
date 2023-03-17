@@ -1,4 +1,4 @@
-from . import Fast5File
+from . import Fast5FileSet
 import matplotlib
 #matplotlib.use('Agg') # Must be called before any other matplotlib calls
 from matplotlib import pyplot as plt
@@ -75,7 +75,7 @@ def run(parser, args):
     start_times = []
     read_lengths = []
     files_processed = 0
-    for fast5 in Fast5File.Fast5FileSet(args.files):
+    for fast5 in Fast5FileSet(args.files):
         if fast5.is_open:
 
             fq = fast5.get_fastq()

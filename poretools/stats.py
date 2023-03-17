@@ -1,5 +1,5 @@
 from . import statistics as stat
-from . import Fast5File
+from . import Fast5FileSet
 import logging
 from collections import defaultdict
 
@@ -11,7 +11,7 @@ def run(parser, args):
         files = 0
         basecalled_files = 0
         stats = defaultdict(list)
-        for fast5 in Fast5File.Fast5FileSet(args.files):
+        for fast5 in Fast5FileSet(args.files):
             files += 1
             fas = fast5.get_fastas_dict()
             if len(fas) > 0:
@@ -45,7 +45,7 @@ def run(parser, args):
                 logger.warning("No valid sequences observed.\n")
     else:
         sizes = []
-        for fast5 in Fast5File.Fast5FileSet(args.files, group=args.group):
+        for fast5 in Fast5FileSet(args.files, group=args.group):
             fas = fast5.get_fastas(args.type)
             sizes.extend([len(fa.seq) for fa in fas if fa is not None])
             fast5.close()
