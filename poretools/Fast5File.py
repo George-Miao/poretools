@@ -955,7 +955,7 @@ Please report this error (with the offending file) to:
                 logger.warning("Cannot find keyinfo. Exiting.\n")
 
 
-def extract_data(s: h5py.Group | h5py.Dataset | h5py.Datatype) -> str | None:
+def extract_data(s):
     if isinstance(s, h5py.Group):
         return extract_data(s['Fastq'])
     elif isinstance(s, h5py.Dataset):
