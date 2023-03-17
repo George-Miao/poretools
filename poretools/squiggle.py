@@ -3,14 +3,17 @@ import sys
 import pandas as pd
 import seaborn as sns
 from matplotlib import rcParams
+
 rcParams.update({'figure.autolayout': True})
 from matplotlib import pyplot as plt
 
 #logging
 import logging
+
 logger = logging.getLogger('poretools')
 
-import Fast5File
+from . import Fast5File
+
 
 def plot_squiggle(args, filename, start_times, mean_signals):
     """
@@ -27,7 +30,8 @@ def plot_squiggle(args, filename, start_times, mean_signals):
     num_events = len(mean_signals)
     events_per_facet = (num_events / args.num_facets) + 1
     # dummy variable to control faceting
-    facet_category = [(i / events_per_facet) + 1 for i in range(len(start_times))]
+    facet_category = [(i / events_per_facet) + 1
+                      for i in range(len(start_times))]
 
     # make a data frame of the start times and mean signals
     d = {'start': start_times, 'mean': mean_signals, 'cat': facet_category}
@@ -38,7 +42,8 @@ def plot_squiggle(args, filename, start_times, mean_signals):
 
     grid = sns.FacetGrid(df, row="cat", sharex=False, size=8)
     #plt.gcf().tight_layout()
-    grid.fig.suptitle('Squiggle plot for read: ' + filename + "\nTotal time (sec): " + str(total_time))
+    grid.fig.suptitle('Squiggle plot for read: ' + filename +
+                      "\nTotal time (sec): " + str(total_time))
     grid.map(plt.step, "start", "mean", marker=',', lw=1.0, where="mid")
     for i, ax in enumerate(grid.axes.flat):
         ax.set_xlim(mins[i], maxs[i])
@@ -48,6 +53,7 @@ def plot_squiggle(args, filename, start_times, mean_signals):
         plt.savefig(plot_file)
     else:
         plt.show()
+
 
 def do_plot_squiggle(args, fast5):
     start_times = []
@@ -70,7 +76,7 @@ def run(parser, args):
 
     fast5_set = Fast5File.Fast5FileSet(args.files)
 
-    first_fast5 = fast5_set.next()
+    first_fast5 = next(fast5_set)
     for fast5 in fast5_set:
         # only create a squiggle plot for multiple reads if saving to file.
         if args.saveas is None:

@@ -6,11 +6,13 @@ import matplotlib
 from matplotlib import pyplot as plt
 
 import seaborn as sns
-import Fast5File
+from . import Fast5File
 
 import logging
+
 logger = logging.getLogger('poretools')
 logger.setLevel(logging.INFO)
+
 
 def plot_hist(sizes, args):
     """
@@ -28,6 +30,7 @@ def plot_hist(sizes, args):
     else:
         plt.show()
 
+
 def run(parser, args):
     sizes = []
     files_processed = 0
@@ -41,4 +44,3 @@ def run(parser, args):
             logger.info("%d files processed." % files_processed)
         fast5.close()
     plot_hist(sizes, args)
-

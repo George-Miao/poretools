@@ -25,8 +25,11 @@ version = '0.5.1'
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.intersphinx', 'sphinx.ext.todo',
-              'sphinx.ext.coverage', 'sphinx.ext.pngmath', 'sphinx.ext.ifconfig', 'sphinx.ext.viewcode']
+extensions = [
+    'sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.intersphinx',
+    'sphinx.ext.todo', 'sphinx.ext.coverage', 'sphinx.ext.pngmath',
+    'sphinx.ext.ifconfig', 'sphinx.ext.viewcode'
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['templates']
@@ -41,8 +44,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'poretools'
-copyright = u'2014'
+project = 'poretools'
+copyright = '2014'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -86,7 +89,6 @@ pygments_style = 'sphinx'
 
 # A list of ignored prefixes for module index sorting.
 # modindex_common_prefix = []
-
 
 # -- Options for HTML output ---------------------------------------------------
 
@@ -137,7 +139,6 @@ html_last_updated_fmt = '%b %d, %Y'
 #    'index': ['sidebar-intro.html', 'sourcelink.html', 'searchbox.html']
 #}
 
-
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
 # html_additional_pages = {}
@@ -185,7 +186,8 @@ htmlhelp_basename = 'poretools-docs'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-    ('index', 'poretools.tex', u'poretools Documentation', u'Nick Loman and Aaron Quinlan', 'manual'),
+    ('index', 'poretools.tex', 'poretools Documentation',
+     'Nick Loman and Aaron Quinlan', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -211,21 +213,19 @@ latex_documents = [
 # If false, no module index is generated.
 # latex_domain_indices = True
 
-
 # -- Options for manual page output --------------------------------------------
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [
-    ('index', 'gemini', u'poretools Documentation', [u'Nick Loman and Aaron Quinlan'], 1)
-]
-
+man_pages = [('index', 'gemini', 'poretools Documentation',
+              ['Nick Loman and Aaron Quinlan'], 1)]
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'http://docs.python.org/': None}
 
 
 class Mock(object):
+
     def __init__(self, *args, **kwargs):
         pass
 
@@ -240,6 +240,7 @@ class Mock(object):
             return type(name, (), {})
         else:
             return Mock()
+
 
 MOCK_MODULES = []
 for mod_name in MOCK_MODULES:
