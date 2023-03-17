@@ -884,8 +884,6 @@ Please report this error (with the offending file) to:
 		Return the sequence in the FAST5 file in FASTQ format
 		"""
         for id, h5path in list(fastq_paths[self.version].items()):
-            logger.warn(f"Extract {id} from {self.filename}")
-
             try:
                 table = extract_data(self.hdf5file[h5path % self.group])
                 if not table:
@@ -894,8 +892,6 @@ Please report this error (with the offending file) to:
                 fq.name += " " + self.filename
                 self.fastqs[id] = fq
             except Exception as e:
-                logger.warn(
-                    f"Failed to extract {id} from {self.filename}: {e}")
                 pass
 
     def _extract_fastas_from_fast5(self):
