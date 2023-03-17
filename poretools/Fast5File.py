@@ -884,12 +884,18 @@ Please report this error (with the offending file) to:
 		Return the sequence in the FAST5 file in FASTQ format
 		"""
         for id, h5path in list(fastq_paths[self.version].items()):
+            logger.warn(f"Extract {id} from {self.filename}")
+
             try:
-                table = self.hdf5file[h5path % self.group]
-                fq = formats.Fastq(table['Fastq'][()])
+                table = extract_data(self.hdf5file[h5path % self.group])
+                if not table:
+                    continue
+                fq = formats.Fastq(table)
                 fq.name += " " + self.filename
                 self.fastqs[id] = fq
             except Exception as e:
+                logger.warn(
+                    f"Failed to extract {id} from {self.filename}: {e}")
                 pass
 
     def _extract_fastas_from_fast5(self):
@@ -898,8 +904,10 @@ Please report this error (with the offending file) to:
 		"""
         for id, h5path in list(fastq_paths[self.version].items()):
             try:
-                table = self.hdf5file[h5path % self.group]
-                fa = formats.Fasta(table['Fastq'][()])
+                table = extract_data(self.hdf5file[h5path % self.group])
+                if not table:
+                    continue
+                fa = formats.Fasta(table)
                 fa.name += " " + self.filename
                 self.fastas[id] = fa
             except Exception as e:
@@ -949,3 +957,12 @@ Please report this error (with the offending file) to:
             except Exception as e:
                 self.keyinfo = None
                 logger.warning("Cannot find keyinfo. Exiting.\n")
+
+
+def extract_data(s: h5py.Group | h5py.Dataset | h5py.Datatype) -> str | None:
+    if isinstance(s, h5py.Group):
+        return extract_data(s['Fastq'])
+    elif isinstance(s, h5py.Dataset):
+        return s.asstr()[()]  # type: ignore
+    else:
+        return None
