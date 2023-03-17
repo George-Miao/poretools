@@ -907,6 +907,8 @@ Please report this error (with the offending file) to:
                 fa.name += " " + self.filename
                 self.fastas[id] = fa
             except Exception as e:
+                logger.warning(
+                    f"Could not extract FASTA from {self.filename}: {e}")
                 pass
 
     def _extract_template_events(self):
