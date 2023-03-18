@@ -1,5 +1,6 @@
 h5py>=3.8.0
 matplotlib>=3.7.1
 seaborn>=0.12.2
+numpy>=1.20
 pandas
 python-dateutil
