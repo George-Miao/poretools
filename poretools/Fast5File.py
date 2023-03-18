@@ -25,18 +25,18 @@ from .Event import Event
 fastq_paths = {
     'closed': {},
     'r9rnn': {
-        'template': '/Analyses/Basecall_RNN_1D_%03d/BaseCalled_template'
+        'template': '/Analyses/Basecall_RNN_1D_{:03d}/BaseCalled_template'
     },
     'metrichor1.16': {
-        'template': '/Analyses/Basecall_1D_%03d/BaseCalled_template',
-        'complement': '/Analyses/Basecall_1D_%03d/BaseCalled_complement',
-        'twodirections': '/Analyses/Basecall_2D_%03d/BaseCalled_2D',
+        'template': '/Analyses/Basecall_1D_{:03d}/BaseCalled_template',
+        'complement': '/Analyses/Basecall_1D_{:03d}/BaseCalled_complement',
+        'twodirections': '/Analyses/Basecall_2D_{:03d}/BaseCalled_2D',
         'pre_basecalled': '/Analyses/EventDetection_000/Reads/'
     },
     'classic': {
-        'template': '/Analyses/Basecall_2D_%03d/BaseCalled_template',
-        'complement': '/Analyses/Basecall_2D_%03d/BaseCalled_complement',
-        'twodirections': '/Analyses/Basecall_2D_%03d/BaseCalled_2D',
+        'template': '/Analyses/Basecall_2D_{:03d}/BaseCalled_template',
+        'complement': '/Analyses/Basecall_2D_{:03d}/BaseCalled_complement',
+        'twodirections': '/Analyses/Basecall_2D_{:03d}/BaseCalled_2D',
         'pre_basecalled': '/Analyses/EventDetection_000/Reads/'
     },
     'prebasecalled': {
@@ -885,7 +885,7 @@ Please report this error (with the offending file) to:
 		"""
         for id, h5path in list(fastq_paths[self.version].items()):
             try:
-                table = extract_data(self.hdf5file[h5path % self.group])
+                table = extract_data(self.hdf5file[h5path.format(self.group)])
                 if not table:
                     continue
                 fq = formats.Fastq(table)
