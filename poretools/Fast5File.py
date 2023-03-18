@@ -892,6 +892,8 @@ Please report this error (with the offending file) to:
                 fq.name += " " + self.filename
                 self.fastqs[id] = fq
             except Exception as e:
+                logger.warning(
+                    f"Could not extract FASTQ from {self.filename}: {e}")
                 pass
 
     def _extract_fastas_from_fast5(self):
@@ -959,7 +961,7 @@ Please report this error (with the offending file) to:
 
 def extract_data(s):
     if isinstance(s, h5py.Group):
-        return extract_data(s['Fastq'])
+        return extract_data(s["Fastq"])
     elif isinstance(s, h5py.Dataset):
         return s.asstr()[()]  # type: ignore
     else:
